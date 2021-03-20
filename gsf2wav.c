@@ -41,8 +41,6 @@ pack_uint16le(uint8_t *d, uint16_t n);
 static void
 pack_uint32le(uint8_t *d, uint32_t n);
 
-static const char * const gsf2wav_separators = "\\/:|";
-
 static void *
 gsf2wav_fopen(void *userdata, const char *filename) {
     (void)userdata;
@@ -120,7 +118,7 @@ gsf2wav_tag_handler(void *ctx, const char *name, const char *value) {
 
 
 static const psf_file_callbacks gsf2wav_psf_stdio = {
-    gsf2wav_separators,
+    "\\/:|",
     NULL,
     gsf2wav_fopen,
     gsf2wav_fread,
