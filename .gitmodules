@@ -1,0 +1,6 @@
+[submodule "lazygsf"]
+	path = lazygsf
+	url = https://github.com/jprjr/lazygsf.git
+[submodule "psflib"]
+	path = psflib
+	url = https://bitbucket.org/losnoco/psflib.git
