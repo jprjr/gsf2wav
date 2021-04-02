@@ -105,7 +105,7 @@ gsf2wav_parse_time(const char *ts)
 
 static int
 gsf2wav_tag_handler(void *ctx, const char *name, const char *value) {
-    printf("tag: %s=%s\n",name,value);
+    printf("%s=%s\n",name,value);
 
     if(strcmp(name,"length") == 0) {
         length = gsf2wav_parse_time(value);
