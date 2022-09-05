@@ -151,6 +151,10 @@ static int gsf2wav_load(void *context, const uint8_t *exe, size_t exe_size, cons
     return gsf_upload_section((gsf_state_t *)context,exe,exe_size);
 }
 
+void status_callback(void *context, char *message) {
+    fprintf(stderr, "%s", message);
+}
+
 int main(int argc, const char *argv[]) {
     gsf_state_t *gsf = NULL;
     FILE *out = NULL;
@@ -170,7 +174,7 @@ int main(int argc, const char *argv[]) {
     if(psf_load(argv[1],
         &gsf2wav_psf_stdio,0x22,gsf2wav_load,gsf,
         gsf2wav_tag_handler,NULL,0,
-        NULL,NULL) <= 0) {
+        status_callback,NULL) <= 0) {
         free(gsf);
         return 1;
     }
