@@ -203,7 +203,7 @@ int main(int argc, const char *argv[]) {
         gsf_render(gsf,buffer,BUFFER_SIZE);
         apply_fade();
         pack_frames();
-        fwrite(packed,4, BUFFER_SIZE, out);
+        fwrite(packed,4, frame_total - frame_no > BUFFER_SIZE ? BUFFER_SIZE : frame_total - frame_no, out);
     }
 
     gsf_shutdown(gsf);
@@ -216,7 +216,7 @@ static int write_wav_header(FILE *f) {
     unsigned int data_size = (unsigned int)frame_total * 4;
     uint8_t tmp[4];
     if(fwrite("RIFF",1,4,f) != 4) return 1;
-    pack_uint32le(tmp, 4 + ( 8 + data_size ) + (8 + 40) );
+    pack_uint32le(tmp, 4 + ( 8 + data_size ) + (8 + 16) );
     if(fwrite(tmp,1,4,f) != 4) return 1;
 
     if(fwrite("WAVE",1,4,f) != 4) return 1;
